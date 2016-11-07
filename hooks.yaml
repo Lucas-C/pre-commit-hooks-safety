@@ -1,6 +1,6 @@
 -   id: python-safety-dependencies-check
     name: Python dependencies checker
     description: "Analyze your requirements for known security vulnerabilities"
-    entry: sh -c 'safety check --full-report' _
+    entry: safety check --full-report
     language: python
-    files: 'requirements'
+    always_run: true
