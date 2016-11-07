@@ -2,5 +2,8 @@
     name: Python dependencies checker
     description: "Analyze your requirements for known security vulnerabilities"
     entry: safety
+    args:
+    - check
+    - --full-report
     language: python
     files: 'requirements'
