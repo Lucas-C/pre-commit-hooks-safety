@@ -21,4 +21,5 @@ You'll need to `pip install safety` beforehand:
             entry: safety
             args: [check, --full-report]
             language: system
+            files: requirements
 ```
