@@ -3,9 +3,9 @@ import sys
 from safety.cli import check
 
 
-def main(argv=None):
+def main(argv=sys.argv[1:]):
     try:
-        check.main(['--full-report', '-r'] + argv)
+        check.main(['--full-report', '-r'] + (argv or []))
     except SystemExit as error:
         if error.code == 0:
             return 0
@@ -13,4 +13,4 @@ def main(argv=None):
 
 
 if __name__ == '__main__':
-    sys.exit(main(sys.argv[1:]))
+    sys.exit(main())

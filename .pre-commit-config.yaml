@@ -22,3 +22,10 @@
     sha: v1.0.7
     hooks:
     -   id: python-safety-dependencies-check
+-   repo: local
+    hooks:
+    -   id: py.test
+        name: py.test
+        language: system
+        entry: sh -c py.test
+        files: ''
