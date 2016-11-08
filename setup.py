@@ -27,4 +27,9 @@ setup(
     install_requires=[
         'safety',
     ],
+    entry_points={
+        'console_scripts': [
+            'safety = pre_commit_hooks.safety:main',
+        ],
+    },
 )
