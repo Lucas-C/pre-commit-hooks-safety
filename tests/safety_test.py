@@ -5,7 +5,7 @@ from pre_commit_hooks.safety import main as safety
 
 
 def test_dev_requirements():
-    assert safety(['dev-requirements.txt']) == 0
+    assert safety(['dev-requirements.txt', 'dev-requirements.txt']) == 0
 
 def test_non_ok_dependency(tmpdir):
     requirements_file = tmpdir.join('requirements.txt')
