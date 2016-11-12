@@ -1,4 +1,4 @@
-A pre-commit to check your Python dependencies against [safety-db](//github.com/pyupio/safety-db).
+A [pre-commit](http://pre-commit.com) hook to check your Python dependencies against [safety-db](//github.com/pyupio/safety-db).
 
 It checks all files containing `requirements` in their name in the repo.
 
