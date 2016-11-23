@@ -1,6 +1,6 @@
 -   id: python-safety-dependencies-check
-    name: Python dependencies checker
-    description: "Analyze your requirements for known security vulnerabilities"
+    name: safety
+    description: Analyze your Python requirements for known security vulnerabilities
     entry: safety
     language: python
     files: requirements

@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='pre-commit-hooks-safety',
-    description='A pre-commit to check your Python dependencies against safety-db',
+    description='A pre-commit hook to check your Python dependencies against safety-db',
     url='https://github.com/Lucas-C/pre-commit-hooks-safety',
     version='1.0.0',
 

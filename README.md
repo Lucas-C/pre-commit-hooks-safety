@@ -15,9 +15,9 @@ You'll need to `pip install safety` beforehand:
 ```
 -   repo: local
     hooks:
-        -   id: python-safety-dependencies-check
-            entry: safety
-            args: [check, --full-report]
-            language: system
-            files: requirements
+    -   id: python-safety-dependencies-check
+        entry: safety
+        args: [check, --full-report]
+        language: system
+        files: requirements
 ```
