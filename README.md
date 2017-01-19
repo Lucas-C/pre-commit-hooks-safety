@@ -1,3 +1,5 @@
+[![](https://travis-ci.org/voyages-sncf-technologies/nexus_uploader.svg?branch=master)](https://travis-ci.org/voyages-sncf-technologies/nexus_uploader)
+
 A [pre-commit](http://pre-commit.com) hook to check your Python dependencies against [safety-db](//github.com/pyupio/safety-db).
 
 It checks all files containing `requirements` in their name in the repo.
