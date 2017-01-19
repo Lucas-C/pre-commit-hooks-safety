@@ -29,7 +29,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'safety = pre_commit_hooks.safety:main',
+            'safety_check = pre_commit_hooks.safety_check:main',
         ],
     },
 )
