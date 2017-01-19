@@ -19,7 +19,7 @@
         - --rcfile=.pylintrc
         - --reports=no
 -   repo: git://github.com/Lucas-C/pre-commit-hooks-safety
-    sha: v1.0.9
+    sha: v1.0.10
     hooks:
     -   id: python-safety-dependencies-check
 -   repo: local

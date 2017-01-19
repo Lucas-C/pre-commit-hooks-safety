@@ -5,7 +5,7 @@ It checks all files containing `requirements` in their name in the repo.
 ## Usage
 ```
 -   repo: https://github.com/Lucas-C/pre-commit-hooks-safety
-    sha: v1.0.9
+    sha: v1.0.10
     hooks:
     -   id: python-safety-dependencies-check
 ```
