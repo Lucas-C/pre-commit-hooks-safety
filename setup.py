@@ -5,7 +5,7 @@ setup(
     name='pre-commit-hooks-safety',
     description='A pre-commit hook to check your Python dependencies against safety-db',
     url='https://github.com/Lucas-C/pre-commit-hooks-safety',
-    version='1.0.0',
+    version='1.1.0',
 
     author='Lucas Cimon',
     author_email='lucas.cimon@gmail.com',
