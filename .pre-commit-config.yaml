@@ -1,10 +1,11 @@
+repos:
 -   repo: git://github.com/Lucas-C/pre-commit-hooks
-    sha: v1.0.0
+    rev: v1.1.6
     hooks:
     -   id: forbid-crlf
     -   id: forbid-tabs
 -   repo: git://github.com/pre-commit/pre-commit-hooks
-    sha: 3fa02652357ff0dbb42b5bc78c673b7bc105fcf3
+    rev: v2.1.0
     hooks:
     -   id: trailing-whitespace
         files: ''
@@ -12,14 +13,14 @@
         - --no-markdown-linebreak-ext
     -   id: check-yaml
 -   repo: git://github.com/pre-commit/mirrors-pylint
-    sha: 4de6c8dfadef1a271a814561ce05b8bc1c446d22
+    rev: v2.3.0.dev1
     hooks:
     -   id: pylint
         args:
         - --rcfile=.pylintrc
         - --reports=no
 -   repo: git://github.com/Lucas-C/pre-commit-hooks-safety
-    sha: v1.1.0
+    rev: v1.1.0
     hooks:
     -   id: python-safety-dependencies-check
 -   repo: local
