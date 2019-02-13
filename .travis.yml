@@ -3,9 +3,5 @@ python:
   - "3.4"
   - "3.5"
   - "3.6"
-install:
-  - pip install .
-  - pip install -r dev-requirements.txt
-script:
-  - pre-commit run --all-files
-  - pytest
+install: pip install -U . -r dev-requirements.txt
+script: pre-commit run --all-files
