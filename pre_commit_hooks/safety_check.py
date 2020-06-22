@@ -5,7 +5,7 @@ from safety.cli import check
 
 def main(argv):
     try:
-        check.main(['--full-report'] + sum((['-r', f] for f in argv), []))
+        check.main(['--full-report'] + sum(([arg] if arg.startswith('-') else ['--file', arg] for arg in argv), []))
         return 0
     except SystemExit as error:
         if error.code == 0:
