@@ -3,7 +3,9 @@ import sys
 from safety.cli import check
 
 
-def main(argv):
+def main(argv=None):
+    if argv is None:
+        argv = sys.argv[1:]
     try:
         check.main(['--full-report'] + sum(([arg] if arg.startswith('-') else ['--file', arg] for arg in argv), []))
         return 0
@@ -14,4 +16,4 @@ def main(argv):
 
 
 if __name__ == '__main__':
-    sys.exit(main(sys.argv[1:]))
+    sys.exit(main())
