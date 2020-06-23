@@ -33,5 +33,5 @@ You'll need to `pip install safety` beforehand:
 
 ### Releasing
 
-1. Bump version in this file and `.pre-commit-config.yaml`
+1. Bump version in this file, `setup.py` & `.pre-commit-config.yaml`
 2. `git commit -nam "Release $version" && git push && git tag $version && git push --tags`
