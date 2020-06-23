@@ -12,8 +12,13 @@ def test_dev_requirements():
 
 def test_non_ok_dependency(tmpdir):
     requirements_file = tmpdir.join('requirements.txt')
-    requirements_file.write('urllib3==1.18')
+    requirements_file.write('urllib3==1.24.1')
     assert safety([str(requirements_file)]) == 1
+
+def test_ignore_ok(tmpdir):
+    requirements_file = tmpdir.join('requirements.txt')
+    requirements_file.write('urllib3==1.24.1')
+    assert safety([str(requirements_file), '--ignore=37055', '--ignore=37071']) == 0
 
 def test_editable_url_to_tarball_dependency(tmpdir):
     requirements_file = tmpdir.join('requirements.txt')
