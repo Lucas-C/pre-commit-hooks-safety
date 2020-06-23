@@ -8,7 +8,6 @@ setup(
     version='1.1.2',
     author='Lucas Cimon',
     author_email='lucas.cimon@gmail.com',
-    platforms='linux',
     classifiers=[
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 3',

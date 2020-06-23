@@ -5,4 +5,6 @@ python:
   - "3.7"
   - "3.8"
 install: pip install -U . -r dev-requirements.txt
-script: pre-commit run --all-files
+script:
+  - rm -f .coverage # avoid annoying error: "Couldn't use data file .../.coverage: no such table: file"
+  - pre-commit run --all-files
