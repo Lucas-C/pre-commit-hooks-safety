@@ -23,3 +23,15 @@ You'll need to `pip install safety` beforehand:
         language: system
         files: requirements
 ```
+
+## Development
+
+### Setup
+
+    pip install -r dev-requirements.txt
+    pre-commit install
+
+### Releasing
+
+1. Bump version in this file and `.pre-commit-config.yaml`
+2. `git commit -nam "Release $version" && git push && git tag $version && git push --tags`
