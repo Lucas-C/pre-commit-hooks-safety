@@ -15,10 +15,42 @@ def test_non_ok_dependency(tmpdir):
     requirements_file.write('urllib3==1.24.1')
     assert safety([str(requirements_file)]) == 1
 
-def test_ignore_ok(tmpdir):
+def test_short_report(tmpdir, capfd):
     requirements_file = tmpdir.join('requirements.txt')
     requirements_file.write('urllib3==1.24.1')
-    assert safety([str(requirements_file), '--ignore=37055', '--ignore=37071']) == 0
+    assert safety(["--short-report", str(requirements_file)]) == 1
+    assert "The urllib3 library" not in capfd.readouterr().out
+
+@pytest.mark.parametrize("report", [["--full-report"], []])
+def test_full_report(tmpdir, report, capfd):
+    requirements_file = tmpdir.join('requirements.txt')
+    requirements_file.write('urllib3==1.24.1')
+    assert safety(report + [str(requirements_file)]) == 1
+    assert "The urllib3 library" in capfd.readouterr().out
+
+@pytest.mark.parametrize(
+    "ignore",
+    [
+        ["--ignore=37055,37071"],
+        ['--ignore=37055', '--ignore=37071'],
+    ]
+)
+def test_ignore_ok(tmpdir, ignore):
+    requirements_file = tmpdir.join('requirements.txt')
+    requirements_file.write('urllib3==1.24.1')
+    assert safety([str(requirements_file)] + ignore) == 0
+
+@pytest.mark.parametrize(
+    "ignore,status",
+    [
+        ("--ignore=37055,37071", 0),
+        ("--ignore=37055", 1)
+    ]
+)
+def test_varargs_escape(tmpdir, ignore, status):
+    requirements_file = tmpdir.join('--ignore=37071')
+    requirements_file.write('urllib3==1.24.1')
+    assert safety([ignore, "--", str(requirements_file)]) == status
 
 def test_poetry_requirements(tmpdir):  # cf. https://github.com/Lucas-C/pre-commit-hooks-safety/issues/5
     requirements_file = tmpdir.join('requirements.txt')
