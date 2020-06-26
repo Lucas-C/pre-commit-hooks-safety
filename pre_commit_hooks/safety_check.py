@@ -39,6 +39,7 @@ def main(argv=None):
         check.main(args)
     except SystemExit as error:
         return error.code
+    return 1
 
 
 if __name__ == "__main__":
