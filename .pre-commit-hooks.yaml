@@ -3,4 +3,4 @@
     description: Analyze your Python requirements for known security vulnerabilities
     entry: safety_check
     language: python
-    files: requirements
+    files: pyproject\.toml|requirements

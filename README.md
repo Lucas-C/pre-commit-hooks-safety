@@ -4,10 +4,12 @@ A [pre-commit](http://pre-commit.com) hook to check your Python dependencies aga
 
 It checks all files containing `requirements` in their name in the repo.
 
+Releases details: [CHANGELOG.md](CHANGELOG.md)
+
 ## Usage
 ```
 -   repo: https://github.com/Lucas-C/pre-commit-hooks-safety
-    sha: v1.1.3
+    rev: v1.2.0
     hooks:
     -   id: python-safety-dependencies-check
 ```

@@ -8,7 +8,7 @@ from pre_commit_hooks.safety_check import main as safety
 
 
 def test_dev_requirements():
-    assert safety(['dev-requirements.txt', 'dev-requirements.txt']) == 0
+    assert safety(['dev-requirements.txt']) == 0
 
 def test_non_ok_dependency(tmpdir):
     requirements_file = tmpdir.join('requirements.txt')
@@ -31,8 +31,8 @@ def test_full_report(tmpdir, report, capfd):
 @pytest.mark.parametrize(
     "ignore",
     [
-        ["--ignore=37055,37071"],
-        ['--ignore=37055', '--ignore=37071'],
+        ["--ignore=37055,37071,38834"],
+        ['--ignore=37055', '--ignore=37071', '--ignore=38834'],
     ]
 )
 def test_ignore_ok(tmpdir, ignore):
@@ -43,12 +43,17 @@ def test_ignore_ok(tmpdir, ignore):
 @pytest.mark.parametrize(
     "ignore,status",
     [
-        ("--ignore=37055,37071", 0),
-        ("--ignore=37055", -1)
+        ("--ignore=37055,37071,38834", 0),
+        ("--ignore=37055,37071", -1),
+        ("--ignore=37055,38834", -1),
+        ("--ignore=37071,38834", -1),
+        ("--ignore=37055", -1),
+        ("--ignore=37071", -1),
+        ("--ignore=38834", -1),
     ]
 )
 def test_varargs_escape(tmpdir, ignore, status):
-    requirements_file = tmpdir.join('--ignore=37071')
+    requirements_file = tmpdir.join('requirements.txt')
     requirements_file.write('urllib3==1.24.1')
     assert safety([ignore, "--", str(requirements_file)]) == status
 
@@ -81,3 +86,36 @@ def test_bare_url_to_tarball_dependency(tmpdir):
     requirements_file = tmpdir.join('requirements.txt')
     requirements_file.write('https://files.pythonhosted.org/packages/6a/11/114c67b0e3c25c19497fde977538339530d8ffa050d6ec9349793f933faa/lockfile-0.10.2.tar.gz')
     assert safety([str(requirements_file)]) == 0
+
+def test_pyproject_toml_without_deps(tmpdir):
+    pyproject_file = tmpdir.join('pyproject.toml')
+    pyproject_file.write("""[tool.poetry]
+name = 'Thing'
+version = '1.2.3'
+description = 'Dummy'
+authors = ['Lucas Cimon']""")
+    assert safety([str(pyproject_file)]) == 0
+
+def test_pyproject_toml_with_ko_deps(tmpdir):
+    pyproject_file = tmpdir.join('pyproject.toml')
+    pyproject_file.write("""[tool.poetry]
+name = 'Thing'
+version = '1.2.3'
+description = 'Dummy'
+authors = ['Lucas Cimon']
+
+[tool.poetry.dependencies]
+jsonpickle = '1.4.1'""")
+    assert safety([str(pyproject_file)]) == -1
+
+def test_pyproject_toml_with_ko_dev_deps(tmpdir):
+    pyproject_file = tmpdir.join('pyproject.toml')
+    pyproject_file.write("""[tool.poetry]
+name = 'Thing'
+version = '1.2.3'
+description = 'Dummy'
+authors = ['Lucas Cimon']
+
+[tool.poetry.dev-dependencies]
+jsonpickle = '1.4.1'""")
+    assert safety([str(pyproject_file)]) == -1
