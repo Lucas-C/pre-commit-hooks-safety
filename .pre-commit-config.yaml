@@ -23,10 +23,3 @@ repos:
     rev: v1.2.1
     hooks:
     -   id: python-safety-dependencies-check
--   repo: local
-    hooks:
-    -   id: py.test
-        name: py.test
-        language: system
-        entry: sh -c py.test
-        files: ^.+\.py$
