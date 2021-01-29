@@ -28,4 +28,6 @@ jobs:
           pip install . -r dev-requirements.txt
           curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
       - name: Execute all pre-commit hooks on all files ☑
-        run: pre-commit run --all-files
+        run: |
+          rm -f .coverage # avoid CoverageException: Couldn't use data file '.../.coverage': UNIQUE constraint failed: meta.key
+          pre-commit run --all-files
