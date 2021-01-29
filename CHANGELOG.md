@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/),
 and [PEP 440](https://www.python.org/dev/peps/pep-0440/).
 
 
-## [1.2.0] - 2021-01-29
+## [1.2.1] - 2021-01-29
 ### Added
 - support for `pyproject.toml` files using `poetry`
 

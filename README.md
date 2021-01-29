@@ -1,4 +1,4 @@
-[![](https://travis-ci.org/Lucas-C/pre-commit-hooks-safety.svg?branch=master)](https://travis-ci.org/Lucas-C/pre-commit-hooks-safety)
+[![build status](https://github.com/Lucas-C/pre-commit-hooks-safety/workflows/build/badge.svg)](https://github.com/Lucas-C/pre-commit-hooks-safety/actions?query=branch%3Amaster)
 
 A [pre-commit](http://pre-commit.com) hook to check your Python dependencies against [safety-db](//github.com/pyupio/safety-db).
 
@@ -9,7 +9,7 @@ Releases details: [CHANGELOG.md](CHANGELOG.md)
 ## Usage
 ```
 -   repo: https://github.com/Lucas-C/pre-commit-hooks-safety
-    rev: v1.2.0
+    rev: v1.2.1
     hooks:
     -   id: python-safety-dependencies-check
 ```

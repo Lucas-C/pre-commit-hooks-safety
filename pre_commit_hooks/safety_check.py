@@ -31,7 +31,7 @@ def build_parser():
     return parser
 
 
-def main(argv=None):
+def main(argv=None):  # pylint: disable=inconsistent-return-statements
     parser = build_parser()
     parsed_args, args_rest = parser.parse_known_args(argv)
     if all("requirements" in file_path for file_path in parsed_args.files):
@@ -40,7 +40,7 @@ def main(argv=None):
     if len(files) == 1 and files[0].name == "pyproject.toml":
         pyproject_toml_filepath = files[0]
         with pyproject_toml_filepath.open() as pyproject_file:
-            lines = pyproject_file.readlines()
+            lines = [line.strip() for line in pyproject_file.readlines()]
         if "[tool.poetry]" in lines:
             with convert_poetry_to_requirements(pyproject_toml_filepath) as tmp_requirements:
                 return call_safety_check([tmp_requirements.name], parsed_args.ignore, parsed_args.full_report, args_rest)
