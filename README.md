@@ -9,7 +9,7 @@ Releases details: [CHANGELOG.md](CHANGELOG.md)
 ## Usage
 ```
 -   repo: https://github.com/Lucas-C/pre-commit-hooks-safety
-    rev: v1.2.1
+    rev: v1.2.2
     hooks:
     -   id: python-safety-dependencies-check
 ```

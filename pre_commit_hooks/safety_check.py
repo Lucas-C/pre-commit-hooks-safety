@@ -41,7 +41,7 @@ def main(argv=None):  # pylint: disable=inconsistent-return-statements
         pyproject_toml_filepath = files[0]
         with pyproject_toml_filepath.open() as pyproject_file:
             lines = [line.strip() for line in pyproject_file.readlines()]
-        if "[tool.poetry]" in lines:
+        if any(line.startswith("[tool.poetry]") for line in lines):
             with convert_poetry_to_requirements(pyproject_toml_filepath) as tmp_requirements:
                 return call_safety_check([tmp_requirements.name], parsed_args.ignore, parsed_args.full_report, args_rest)
         parser.error("Unsupported build tool: this pre-commit hook currently only handles pyproject.toml with Poetry")

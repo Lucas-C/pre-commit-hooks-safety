@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/),
 and [PEP 440](https://www.python.org/dev/peps/pep-0440/).
 
 
+## [1.2.2] - 2021-09-17
+### Fixed
+- package manager detection now allows for a comment at the end of the line `[tool.poetry]` in `pyproject.toml`
+
 ## [1.2.1] - 2021-01-29
 ### Added
 - support for `pyproject.toml` files using `poetry`
