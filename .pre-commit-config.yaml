@@ -1,19 +1,17 @@
 repos:
 -   repo: git://github.com/Lucas-C/pre-commit-hooks
-    rev: v1.1.7
+    rev: v1.1.10
     hooks:
     -   id: forbid-crlf
     -   id: forbid-tabs
 -   repo: git://github.com/pre-commit/pre-commit-hooks
-    rev: v3.1.0
+    rev: v4.0.1
     hooks:
     -   id: trailing-whitespace
         files: ''
-        args:
-        - --no-markdown-linebreak-ext
     -   id: check-yaml
 -   repo: git://github.com/pre-commit/mirrors-pylint
-    rev: v2.5.3
+    rev: v3.0.0a4
     hooks:
     -   id: pylint
         args:

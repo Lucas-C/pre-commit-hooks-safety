@@ -43,10 +43,10 @@ You can also select between `--full-report` and `--short-report`. By default saf
         files: pyproject.toml
         args: [--short-report]
 ```
-This will remove the extra detail about what vulnerability was fixed. This can be useful if multiple issues are found and you want to read through less text.  
+This will remove the extra detail about what vulnerability was fixed. This can be useful if multiple issues are found and you want to read through less text.
 Of course these can be used in any combination with each other as needed.
 
-For more information look at the [pre-commit](https://pre-commit.com/#passing-arguments-to-hooks) documentation. There you can find some more thorough examples. 
+For more information look at the [pre-commit](https://pre-commit.com/#passing-arguments-to-hooks) documentation. There you can find some more thorough examples.
 ## Alternative local hook
 You'll need to `pip install safety` beforehand:
 ```
