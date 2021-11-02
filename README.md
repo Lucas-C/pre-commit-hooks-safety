@@ -16,7 +16,9 @@ Releases details: [CHANGELOG.md](CHANGELOG.md)
 
 
 ## How to Use Arguments
-There are a few different arguements that this hook will accept. The first is the `files` arguement. Simply put which file your dependancies are listed in.
+There are a few different arguements that this hook will accept.
+
+The first is the `files` arguement. Simply put which file your dependancies are listed in.
 ```
 -   repo: https://github.com/Lucas-C/pre-commit-hooks-safety
     rev: v1.2.2
@@ -43,6 +45,8 @@ You can also select between `--full-report` and `--short-report`. By default saf
 ```
 This will remove the extra detail about what vulnerability was fixed. This can be useful if multiple issues are found and you want to read through less text.  
 Of course these can be used in any combination with each other as needed.
+
+For more information look at the [pre-commit](https://pre-commit.com/#passing-arguments-to-hooks) documentation. There you can find some more thorough examples. 
 ## Alternative local hook
 You'll need to `pip install safety` beforehand:
 ```
