@@ -66,8 +66,10 @@ def call_safety_check(requirements_file_paths, ignore_args, full_report_arg, arg
 @contextmanager
 def convert_poetry_to_requirements(pyproject_toml_filepath):  # Sad function name :(
     poetry_cmd_path = which("poetry")
-    if not poetry_cmd_path:
-        poetry_cmd_path = os.path.join(os.environ.get("HOME", ""), ".poetry", "bin", "poetry")
+    if not poetry_cmd_path:  # Using install-poetry.py installation $PATH:
+        poetry_cmd_path = os.path.join(os.environ.get("HOME", ""), ".local", "bin", "poetry")
+        if not os.path.exists(poetry_cmd_path):  # Old get-poetry.py installation $PATH:
+            poetry_cmd_path = os.path.join(os.environ.get("HOME", ""), ".poetry", "bin", "poetry")
     # Always passing delete=False to NamedTemporaryFile in order to avoid permission errors on Windows:
     with NamedTemporaryFile(delete=False) as ntf:
         try:
