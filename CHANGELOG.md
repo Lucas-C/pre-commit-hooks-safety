@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/),
 and [PEP 440](https://www.python.org/dev/peps/pep-0440/).
 
 
+## [1.2.3] - 2022-01-23
+### Added
+- `poetry` CLI command is now looked up in `~/.local/bin`, as this is the new installation path with `install-poetry.py`
+
 ## [1.2.2] - 2021-09-17
 ### Fixed
 - package manager detection now allows for a comment at the end of the line `[tool.poetry]` in `pyproject.toml`
