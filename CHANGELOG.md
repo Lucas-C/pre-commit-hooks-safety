@@ -10,7 +10,7 @@ and [PEP 440](https://www.python.org/dev/peps/pep-0440/).
 
 ## [1.2.3] - 2022-01-23
 ### Added
-- `poetry` CLI command is now looked up in `~/.local/bin`, as this is the new installation path with `install-poetry.py`
+- `poetry` CLI command is now also looked up in `~/.local/bin`, as this is the new installation path with `install-poetry.py`
 
 ## [1.2.2] - 2021-09-17
 ### Fixed

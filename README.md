@@ -53,6 +53,7 @@ You'll need to `pip install safety` beforehand:
 -   repo: local
     hooks:
     -   id: python-safety-dependencies-check
+        name: safety
         entry: safety
         args: [check, --full-report]
         language: system
