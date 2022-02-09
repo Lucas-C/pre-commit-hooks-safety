@@ -29,33 +29,31 @@ def test_full_report(tmpdir, report, capfd):
     assert "The urllib3 library" in capfd.readouterr().out
 
 @pytest.mark.parametrize(
-    "ignore",
+    "args",
     [
-        ["--ignore=37055,37071,38834"],
-        ['--ignore=37055', '--ignore=37071', '--ignore=38834'],
+        ["--ignore=37055,37071,38834,43975"],
+        ['--ignore=37055', '--ignore=37071', '--ignore=38834', '--ignore=43975'],
     ]
 )
-def test_ignore_ok(tmpdir, ignore):
+def test_ignore_ok(tmpdir, args):
     requirements_file = tmpdir.join('requirements.txt')
     requirements_file.write('urllib3==1.24.1')
-    assert safety([str(requirements_file)] + ignore) == 0
+    assert safety([str(requirements_file)] + args) == 0
 
 @pytest.mark.parametrize(
-    "ignore,status",
+    "ignore_arg,status",
     [
-        ("--ignore=37055,37071,38834", 0),
-        ("--ignore=37055,37071", -1),
-        ("--ignore=37055,38834", -1),
-        ("--ignore=37071,38834", -1),
+        ("--ignore=37055,37071,38834,43975", 0),
+        ("--ignore=37055,37071,38834", -1),
         ("--ignore=37055", -1),
         ("--ignore=37071", -1),
         ("--ignore=38834", -1),
     ]
 )
-def test_varargs_escape(tmpdir, ignore, status):
+def test_varargs_escape(tmpdir, ignore_arg, status):
     requirements_file = tmpdir.join('requirements.txt')
     requirements_file.write('urllib3==1.24.1')
-    assert safety([ignore, "--", str(requirements_file)]) == status
+    assert safety([ignore_arg, "--", str(requirements_file)]) == status
 
 def test_poetry_requirements(tmpdir):  # cf. https://github.com/Lucas-C/pre-commit-hooks-safety/issues/5
     requirements_file = tmpdir.join('requirements.txt')
