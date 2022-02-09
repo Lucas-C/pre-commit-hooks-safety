@@ -14,7 +14,6 @@ Releases details: [CHANGELOG.md](CHANGELOG.md)
     -   id: python-safety-dependencies-check
 ```
 
-
 ## How to Use Arguments
 There are a few different arguements that this hook will accept.
 
@@ -47,6 +46,7 @@ This will remove the extra detail about what vulnerability was fixed. This can b
 Of course these can be used in any combination with each other as needed.
 
 For more information look at the [pre-commit](https://pre-commit.com/#passing-arguments-to-hooks) documentation. There you can find some more thorough examples.
+
 ## Alternative local hook
 You'll need to `pip install safety` beforehand:
 ```
@@ -55,7 +55,7 @@ You'll need to `pip install safety` beforehand:
     -   id: python-safety-dependencies-check
         name: safety
         entry: safety
-        args: [check, --full-report]
+        args: [check, --full-report, --file]
         language: system
         files: requirements
 ```
