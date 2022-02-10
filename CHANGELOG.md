@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/),
 and [PEP 440](https://www.python.org/dev/peps/pep-0440/).
 
 
+## [1.2.4] - 2022-02-10
+### Fixed
+- `PermissionError: [WinError 32] The process cannot access the file because it is being used by another process` - thanks @Cielquan for fixing [#23](https://github.com/Lucas-C/pre-commit-hooks-safety/issues/23)
+
 ## [1.2.3] - 2022-01-23
 ### Added
 - `poetry` CLI command is now also looked up in `~/.local/bin`, as this is the new installation path with `install-poetry.py`
