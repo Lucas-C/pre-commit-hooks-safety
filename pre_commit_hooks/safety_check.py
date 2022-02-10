@@ -71,14 +71,15 @@ def convert_poetry_to_requirements(pyproject_toml_filepath):  # Sad function nam
         if not os.path.exists(poetry_cmd_path):  # Old get-poetry.py installation $PATH:
             poetry_cmd_path = os.path.join(os.environ.get("HOME", ""), ".poetry", "bin", "poetry")
     # Always passing delete=False to NamedTemporaryFile in order to avoid permission errors on Windows:
-    with NamedTemporaryFile(delete=False) as ntf:
-        try:
+    try:
+        ntf = NamedTemporaryFile(delete=False)
+        with ntf:
             # Placing ourselves in the pyproject.toml parent directory:
             with chdir(pyproject_toml_filepath.parent):
                 check_call([poetry_cmd_path, "export", "--dev", "--format", "requirements.txt", "--output", ntf.name])
             yield ntf
-        finally:  # Manually deleting temporary file:
-            os.remove(ntf.name)
+    finally:  # Manually deleting temporary file:
+        os.remove(ntf.name)
 
 
 @contextmanager
