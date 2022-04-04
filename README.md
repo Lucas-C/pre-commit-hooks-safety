@@ -46,6 +46,7 @@ This will remove the extra detail about what vulnerability was fixed. This can b
 Of course these can be used in any combination with each other as needed.
 
 For more information look at the [pre-commit](https://pre-commit.com/#passing-arguments-to-hooks) documentation. There you can find some more thorough examples.
+You may for example want to use `always_run: true` in order to systematically run this hook, even when no dependency files have been modified.
 
 ## Alternative local hook
 You'll need to `pip install safety` beforehand:
@@ -71,3 +72,4 @@ You'll need to `pip install safety` beforehand:
 
 1. Bump version in this `README.md` file, `setup.py`, `.pre-commit-config.yaml` & `CHANGELOG.md`
 2. `git commit -nam "Release $version" && git push && git tag $version && git push --tags`
+3. Create a GitHub release
