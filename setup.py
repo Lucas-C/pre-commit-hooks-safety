@@ -21,7 +21,7 @@ setup(
     ],
     packages=find_packages('.'),
     install_requires=[
-        'safety',
+        'safety>=2.0.0,<3.0.0',
     ],
     entry_points={
         'console_scripts': [

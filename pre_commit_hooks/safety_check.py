@@ -9,7 +9,7 @@ from pathlib import Path
 from subprocess import check_call
 from tempfile import NamedTemporaryFile
 
-from safety.cli import check
+from safety.cli import cli
 
 
 def build_parser():
@@ -50,14 +50,14 @@ def main(argv=None):  # pylint: disable=inconsistent-return-statements
 
 
 def call_safety_check(requirements_file_paths, ignore_args, full_report_arg, args_rest):
-    safety_args = []
+    safety_args = ['check']
     for file_path in requirements_file_paths:
         safety_args += ["--file", file_path]
     for codes in (ignore_args or []):
         for code in codes.split(","):
             safety_args += ["--ignore", code]
     try:
-        check.main(safety_args + [full_report_arg] + args_rest, prog_name="safety")
+        cli.main(safety_args + [full_report_arg] + args_rest, prog_name="safety")
     except SystemExit as error:
         return error.code
     return 1
