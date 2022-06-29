@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/),
 and [PEP 440](https://www.python.org/dev/peps/pep-0440/).
 
 
+## [1.2.5] - 2022-06-29
+### Fixed
+- `Pin version of underlying safety package to be >=1.0.0 and <2.0.0` - thanks @sshishov for fixing [#29](https://github.com/Lucas-C/pre-commit-hooks-safety/issues/29)
+
 ## [1.2.4] - 2022-02-10
 ### Fixed
 - `PermissionError: [WinError 32] The process cannot access the file because it is being used by another process` - thanks @Cielquan for fixing [#23](https://github.com/Lucas-C/pre-commit-hooks-safety/issues/23)
