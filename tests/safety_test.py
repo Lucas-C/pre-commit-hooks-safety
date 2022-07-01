@@ -3,6 +3,7 @@ from __future__ import absolute_import
 from __future__ import unicode_literals
 
 import pytest
+from safety.constants import EXIT_CODE_VULNERABILITIES_FOUND
 
 from pre_commit_hooks.safety_check import main as safety
 
@@ -13,20 +14,24 @@ def test_dev_requirements():
 def test_non_ok_dependency(tmpdir):
     requirements_file = tmpdir.join('requirements.txt')
     requirements_file.write('urllib3==1.24.1')
-    assert safety([str(requirements_file)]) == -1
+    assert safety([str(requirements_file)]) == EXIT_CODE_VULNERABILITIES_FOUND
 
-def test_short_report(tmpdir, capfd):
+def test_short_report(tmpdir):
     requirements_file = tmpdir.join('requirements.txt')
     requirements_file.write('urllib3==1.24.1')
-    assert safety(["--short-report", str(requirements_file)]) == -1
-    assert "The urllib3 library" not in capfd.readouterr().out
+    assert safety(["--short-report", str(requirements_file)]) == EXIT_CODE_VULNERABILITIES_FOUND
+
+def test_disable_telemetry(tmpdir):
+    requirements_file = tmpdir.join('requirements.txt')
+    requirements_file.write('urllib3==1.24.1')
+    assert safety(["--disable-telemetry", str(requirements_file)]) == EXIT_CODE_VULNERABILITIES_FOUND
 
 @pytest.mark.parametrize("report", [["--full-report"], []])
 def test_full_report(tmpdir, report, capfd):
     requirements_file = tmpdir.join('requirements.txt')
     requirements_file.write('urllib3==1.24.1')
-    assert safety(report + [str(requirements_file)]) == -1
-    assert "The urllib3 library" in capfd.readouterr().out
+    assert safety(report + [str(requirements_file)]) == EXIT_CODE_VULNERABILITIES_FOUND
+    assert "urllib3 library" in capfd.readouterr().out
 
 @pytest.mark.parametrize(
     "args",
@@ -44,10 +49,10 @@ def test_ignore_ok(tmpdir, args):
     "ignore_arg,status",
     [
         ("--ignore=37055,37071,38834,43975", 0),
-        ("--ignore=37055,37071,38834", -1),
-        ("--ignore=37055", -1),
-        ("--ignore=37071", -1),
-        ("--ignore=38834", -1),
+        ("--ignore=37055,37071,38834", EXIT_CODE_VULNERABILITIES_FOUND),
+        ("--ignore=37055", EXIT_CODE_VULNERABILITIES_FOUND),
+        ("--ignore=37071", EXIT_CODE_VULNERABILITIES_FOUND),
+        ("--ignore=38834", EXIT_CODE_VULNERABILITIES_FOUND),
     ]
 )
 def test_varargs_escape(tmpdir, ignore_arg, status):
@@ -104,7 +109,7 @@ authors = ['Lucas Cimon']
 
 [tool.poetry.dependencies]
 jsonpickle = '1.4.1'""")
-    assert safety([str(pyproject_file)]) == -1
+    assert safety([str(pyproject_file)]) == EXIT_CODE_VULNERABILITIES_FOUND
 
 def test_pyproject_toml_with_ko_dev_deps(tmpdir):
     pyproject_file = tmpdir.join('pyproject.toml')
@@ -116,4 +121,4 @@ authors = ['Lucas Cimon']
 
 [tool.poetry.dev-dependencies]
 jsonpickle = '1.4.1'""")
-    assert safety([str(pyproject_file)]) == -1
+    assert safety([str(pyproject_file)]) == EXIT_CODE_VULNERABILITIES_FOUND

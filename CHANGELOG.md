@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/),
 and [PEP 440](https://www.python.org/dev/peps/pep-0440/).
 
 
+## [1.3.0] - 2022-07-01
+### Fixed
+- compatibility with safety 2.0.0
+
 ## [1.2.4] - 2022-02-10
 ### Fixed
 - `PermissionError: [WinError 32] The process cannot access the file because it is being used by another process` - thanks @Cielquan for fixing [#23](https://github.com/Lucas-C/pre-commit-hooks-safety/issues/23)

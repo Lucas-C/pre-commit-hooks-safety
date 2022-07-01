@@ -1,6 +1,0 @@
--   id: python-safety-dependencies-check
-    name: safety
-    description: Analyze your Python requirements for known security vulnerabilities
-    entry: safety_check
-    language: python
-    files: requirements

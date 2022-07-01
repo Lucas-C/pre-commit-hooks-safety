@@ -6,10 +6,12 @@ It checks all files containing `requirements` in their name in the repo.
 
 Releases details: [CHANGELOG.md](CHANGELOG.md)
 
+Note that **telemetry data will be sent with every Safety call**. These data are anonymous and not sensitive. This includes the Python version, the Safety command used (check/license/review), and the Safety options used (without their values). Users can disable this functionality by adding the `--disable-telemetry` flag.
+
 ## Usage
 ```
 -   repo: https://github.com/Lucas-C/pre-commit-hooks-safety
-    rev: v1.2.4
+    rev: v1.3.0
     hooks:
     -   id: python-safety-dependencies-check
 ```
@@ -20,7 +22,7 @@ There are a few different arguements that this hook will accept.
 The first is the `files` arguement. Simply put which file your dependancies are listed in.
 ```
 -   repo: https://github.com/Lucas-C/pre-commit-hooks-safety
-    rev: v1.2.4
+    rev: v1.3.0
     hooks:
     -   id: python-safety-dependencies-check
         files: pyproject.toml
@@ -28,7 +30,7 @@ The first is the `files` arguement. Simply put which file your dependancies are 
 The next is the `--ignore` flag. This will ignore a comma seperated list of known security issues. For example
 ```
 -   repo: https://github.com/Lucas-C/pre-commit-hooks-safety
-    rev: v1.2.4
+    rev: v1.3.0
     hooks:
     -   id: python-safety-dependencies-check
         args: [--ignore=39153,39652]
@@ -36,7 +38,7 @@ The next is the `--ignore` flag. This will ignore a comma seperated list of know
 You can also select between `--full-report` and `--short-report`. By default safety will use the `--full-report` flag so you can omit it for cleaner code.
 ```
 -   repo: https://github.com/Lucas-C/pre-commit-hooks-safety
-    rev: v1.2.4
+    rev: v1.3.0
     hooks:
     -   id: python-safety-dependencies-check
         files: pyproject.toml

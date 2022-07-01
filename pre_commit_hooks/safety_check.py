@@ -9,22 +9,23 @@ from pathlib import Path
 from subprocess import check_call
 from tempfile import NamedTemporaryFile
 
-from safety.cli import check
+from safety.cli import cli
 
 
 def build_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--full-report",
-        default="--full-report",
-        const="--full-report",
+        dest="report_arg",
         action="store_const",
+        const="--full-report",
+        default="--full-report",
     )
     parser.add_argument(
         "--short-report",
-        dest="full_report",
-        const="--short-report",
+        dest="report_arg",
         action="store_const",
+        const="--short-report",
     )
     parser.add_argument("--ignore", "-i", action="append")
     parser.add_argument("files", nargs="+")
@@ -35,7 +36,7 @@ def main(argv=None):  # pylint: disable=inconsistent-return-statements
     parser = build_parser()
     parsed_args, args_rest = parser.parse_known_args(argv)
     if all("requirements" in file_path for file_path in parsed_args.files):
-        return call_safety_check(parsed_args.files, parsed_args.ignore, parsed_args.full_report, args_rest)
+        return call_safety_check(parsed_args.files, parsed_args.ignore, parsed_args.report_arg, args_rest)
     files = [Path(f) for f in parsed_args.files]
     if len(files) == 1 and files[0].name == "pyproject.toml":
         pyproject_toml_filepath = files[0]
@@ -43,21 +44,25 @@ def main(argv=None):  # pylint: disable=inconsistent-return-statements
             lines = [line.strip() for line in pyproject_file.readlines()]
         if any(line.startswith("[tool.poetry]") for line in lines):
             with convert_poetry_to_requirements(pyproject_toml_filepath) as tmp_requirements:
-                return call_safety_check([tmp_requirements.name], parsed_args.ignore, parsed_args.full_report, args_rest)
+                return call_safety_check([tmp_requirements.name], parsed_args.ignore, parsed_args.report_arg, args_rest)
         parser.error("Unsupported build tool: this pre-commit hook currently only handles pyproject.toml with Poetry")
     else:
         parser.error("Unsupported mix of pyproject.toml & requirements files found")
 
 
-def call_safety_check(requirements_file_paths, ignore_args, full_report_arg, args_rest):
+def call_safety_check(requirements_file_paths, ignore_args, report_arg, args_rest):
     safety_args = []
+    if "--disable-telemetry" in args_rest:
+        safety_args.append("--disable-telemetry")
+        args_rest = [arg for arg in args_rest if arg != "--disable-telemetry"]
+    safety_args.append("check")
     for file_path in requirements_file_paths:
         safety_args += ["--file", file_path]
     for codes in (ignore_args or []):
         for code in codes.split(","):
             safety_args += ["--ignore", code]
     try:
-        check.main(safety_args + [full_report_arg] + args_rest, prog_name="safety")
+        cli.main(safety_args + [report_arg] + args_rest, prog_name="safety")
     except SystemExit as error:
         return error.code
     return 1
