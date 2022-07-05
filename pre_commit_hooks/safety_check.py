@@ -45,9 +45,10 @@ def main(argv=None):  # pylint: disable=inconsistent-return-statements
         if any(line.startswith("[tool.poetry]") for line in lines):
             with convert_poetry_to_requirements(pyproject_toml_filepath) as tmp_requirements:
                 return call_safety_check([tmp_requirements.name], parsed_args.ignore, parsed_args.report_arg, args_rest)
-        parser.error("Unsupported build tool: this pre-commit hook currently only handles pyproject.toml with Poetry")
+        parser.error("Unsupported build tool: this pre-commit hook currently only handles pyproject.toml with Poetry"
+                     " ([tool.poetry] must be present in pyproject.toml)")
     else:
-        parser.error("Unsupported mix of pyproject.toml & requirements files found")
+        parser.error(f"Unsupported mix of pyproject.toml & requirements files found: {parsed_args.files}")
 
 
 def call_safety_check(requirements_file_paths, ignore_args, report_arg, args_rest):
