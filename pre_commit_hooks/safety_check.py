@@ -1,5 +1,8 @@
+"""Safety utilities."""
 from __future__ import print_function
 
+
+# Standar libraries
 import argparse
 import os
 import sys
@@ -9,10 +12,12 @@ from pathlib import Path
 from subprocess import check_call
 from tempfile import NamedTemporaryFile
 
+#Third part libraries
 from safety.cli import cli
 
 
 def build_parser():
+    """Build a parser in order to get args."""
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--full-report",
@@ -52,6 +57,7 @@ def main(argv=None):  # pylint: disable=inconsistent-return-statements
 
 
 def call_safety_check(requirements_file_paths, ignore_args, report_arg, args_rest):
+    """Call the safety cli checks."""
     safety_args = []
     if "--disable-telemetry" in args_rest:
         safety_args.append("--disable-telemetry")
