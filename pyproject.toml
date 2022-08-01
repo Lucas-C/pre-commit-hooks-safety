@@ -23,7 +23,7 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.8,<4"
+python = ">=3.7.2,<4"
 safety =  "^2.1.1"
 pre-commit = "^2.20.0"
 
@@ -43,7 +43,7 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-safety_check = "safety_check = pre_commit_hooks.safety_check:main"
+safety_check = "pre_commit_hooks.safety_check:main"
 
 # pyproject.toml
 [tool.pytest.ini_options]
