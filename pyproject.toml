@@ -18,7 +18,8 @@ classifiers = [
     "Topic :: Software Development",
 ]
 packages = [
-    { include = "pre_commit_hooks" }
+    { include = "pre_commit_hooks" },
+    { include = "pre_commit_hooks/safety_check.py" },
 ]
 
 [tool.poetry.dependencies]
