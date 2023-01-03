@@ -1,11 +1,11 @@
 repos:
 -   repo: https://github.com/Lucas-C/pre-commit-hooks
-    rev: v1.3.0
+    rev: v1.3.1
     hooks:
     -   id: forbid-crlf
     -   id: forbid-tabs
 -   repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.3.0
+    rev: v4.4.0
     hooks:
     -   id: trailing-whitespace
         files: ''
