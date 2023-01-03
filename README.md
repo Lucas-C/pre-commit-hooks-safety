@@ -9,7 +9,7 @@ Releases details: [CHANGELOG.md](CHANGELOG.md)
 Note that **telemetry data will be sent with every Safety call**. These data are anonymous and not sensitive. This includes the Python version, the Safety command used (check/license/review), and the Safety options used (without their values). Users can disable this functionality by adding the `--disable-telemetry` flag.
 
 ## Usage
-```
+```yaml
 -   repo: https://github.com/Lucas-C/pre-commit-hooks-safety
     rev: v1.3.0
     hooks:
@@ -20,7 +20,7 @@ Note that **telemetry data will be sent with every Safety call**. These data are
 There are a few different arguements that this hook will accept.
 
 The first is the `files` arguement. Simply put which file your dependancies are listed in.
-```
+```yaml
 -   repo: https://github.com/Lucas-C/pre-commit-hooks-safety
     rev: v1.3.0
     hooks:
@@ -28,21 +28,21 @@ The first is the `files` arguement. Simply put which file your dependancies are 
         files: pyproject.toml
 ```
 The next is the `--ignore` flag. This will ignore a comma seperated list of known security issues. For example
-```
+```yaml
 -   repo: https://github.com/Lucas-C/pre-commit-hooks-safety
     rev: v1.3.0
     hooks:
     -   id: python-safety-dependencies-check
-        args: [--ignore=39153,39652]
+        args: ["--ignore=39153,39652"]
 ```
 You can also select between `--full-report` and `--short-report`. By default safety will use the `--full-report` flag so you can omit it for cleaner code.
-```
+```yaml
 -   repo: https://github.com/Lucas-C/pre-commit-hooks-safety
     rev: v1.3.0
     hooks:
     -   id: python-safety-dependencies-check
         files: pyproject.toml
-        args: [--short-report]
+        args: ["--short-report"]
 ```
 This will remove the extra detail about what vulnerability was fixed. This can be useful if multiple issues are found and you want to read through less text.
 Of course these can be used in any combination with each other as needed.
@@ -52,7 +52,7 @@ You may for example want to use `always_run: true` in order to systematically ru
 
 ## Alternative local hook
 You'll need to `pip install safety` beforehand:
-```
+```yaml
 -   repo: local
     hooks:
     -   id: python-safety-dependencies-check
