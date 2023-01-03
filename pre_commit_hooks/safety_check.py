@@ -82,7 +82,7 @@ def convert_poetry_to_requirements(pyproject_toml_filepath):  # Sad function nam
         with ntf:
             # Placing ourselves in the pyproject.toml parent directory:
             with chdir(pyproject_toml_filepath.parent):
-                check_call([poetry_cmd_path, "export", "--dev", "--format", "requirements.txt", "--output", ntf.name])
+                check_call([poetry_cmd_path, "export", "--with", "dev", "--format", "requirements.txt", "--output", ntf.name])
             yield ntf
     finally:  # Manually deleting temporary file:
         os.remove(ntf.name)
