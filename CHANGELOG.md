@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/),
 and [PEP 440](https://www.python.org/dev/peps/pep-0440/).
 
 
+## [1.3.1] - 2023-01-04
+### Fixed
+- compatibility with latest safety version (2.3.5)
+- ensured compatibility with Python 3.11
+
 ## [1.3.0] - 2022-07-01
 ### Fixed
 - compatibility with safety 2.0.0
