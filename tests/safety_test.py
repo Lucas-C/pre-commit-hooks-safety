@@ -105,6 +105,7 @@ description = 'Dummy'
 authors = ['Lucas Cimon']
 
 [tool.poetry.dependencies]
+python = "^3.7"
 jsonpickle = '1.4.1'""")
     assert safety([str(pyproject_file)]) == EXIT_CODE_VULNERABILITIES_FOUND
 
@@ -115,6 +116,9 @@ name = 'Thing'
 version = '1.2.3'
 description = 'Dummy'
 authors = ['Lucas Cimon']
+
+[tool.poetry.dependencies]
+python = "^3.7"
 
 [tool.poetry.dev-dependencies]
 jsonpickle = '1.4.1'""")
