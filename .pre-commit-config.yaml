@@ -10,8 +10,8 @@ repos:
     -   id: trailing-whitespace
         files: ''
     -   id: check-yaml
--   repo: https://github.com/pre-commit/mirrors-pylint
-    rev: v3.0.0a5
+-   repo: https://github.com/pycqa/pylint
+    rev: v3.0.0-a5
     hooks:
     -   id: pylint
         args:
