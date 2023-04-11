@@ -50,6 +50,16 @@ Of course these can be used in any combination with each other as needed.
 For more information look at the [pre-commit](https://pre-commit.com/#passing-arguments-to-hooks) documentation. There you can find some more thorough examples.
 You may for example want to use `always_run: true` in order to systematically run this hook, even when no dependency files have been modified.
 
+## Supported files
+
+`requirements` files are supported with any ending (e.g. .txt) and you can pass multiple files to be checked.
+
+`pyproject.toml` files are only supported with a single file per invokation. If you have subpackages with one `pyproject.toml` each you need to invoke the hook multiple times.
+
+Currently only [`poetry`](https://python-poetry.org/) is a supported package mangers for `pyproject.toml` files. When using a `pyproject.toml` file you need to provide [`poetry`](https://python-poetry.org/) via your PATH and have at least version 1.2 installed.
+
+A mix of both file types is not supported.
+
 ## Alternative local hook
 You'll need to `pip install safety` beforehand:
 ```yaml
