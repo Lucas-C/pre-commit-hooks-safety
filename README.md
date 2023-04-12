@@ -67,7 +67,7 @@ You'll need to `pip install safety` beforehand:
 
 ### Setup
 
-    pip install -r dev-requirements.txt
+    pip install -U -r dev-requirements.txt
     pre-commit install
 
 ### Releasing

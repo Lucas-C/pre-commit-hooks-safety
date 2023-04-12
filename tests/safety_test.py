@@ -62,15 +62,12 @@ def test_varargs_escape(tmpdir, ignore_arg, status):
 
 def test_poetry_requirements(tmpdir):  # cf. https://github.com/Lucas-C/pre-commit-hooks-safety/issues/5
     requirements_file = tmpdir.join('requirements.txt')
-    requirements_file.write('''colored==1.4.2 \
-    --hash=sha256:056fac09d9e39b34296e7618897ed1b8c274f98423770c2980d829fd670955ed
+    requirements_file.write('''colored==1.4.2
 colored-traceback==0.3.0 \
     --hash=sha256:6da7ce2b1da869f6bb54c927b415b95727c4bb6d9a84c4615ea77d9872911b05 \
     --hash=sha256:f76c21a4b4c72e9e09763d4d1b234afc469c88693152a763ad6786467ef9e79f
-configobj==5.0.6 \
-    --hash=sha256:a2f5650770e1c87fb335af19a9b7eb73fc05ccf22144eb68db7d00cd2bcb0902
-future==0.18.2 \
-    --hash=sha256:b1bead90b70cf6ec3f0710ae53a525360fa360d306a86583adc6bf83a4db537d
+configobj==5.0.6
+future==0.18.3
 six==1.13.0 \
     --hash=sha256:1f1b7d42e254082a9db6279deae68afb421ceba6158efa6131de7b3003ee93fd \
     --hash=sha256:30f610279e8b2578cab6db20741130331735c781b56053c59c4076da27f06b66''')
