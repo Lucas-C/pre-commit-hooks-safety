@@ -56,7 +56,7 @@ You may for example want to use `always_run: true` in order to systematically ru
 
 `pyproject.toml` files are only supported with a single file per invokation. If you have subpackages with one `pyproject.toml` in each, you need to invoke the hook multiple times.
 
-Currently only [`poetry`](https://python-poetry.org/) is a supported package mangers for `pyproject.toml` files. When using a `pyproject.toml` file you need to provide [`poetry`](https://python-poetry.org/) via your PATH and have at least version 1.2 installed.
+Currently [`poetry`](https://python-poetry.org/) is the only supported package manager for `pyproject.toml` files. When using a `pyproject.toml` file you need to have [`poetry`](https://python-poetry.org/) in your `PATH`, and have at least version 1.2 installed.
 
 A mix of both file types is not supported.
 
