@@ -66,7 +66,6 @@ def test_poetry_requirements(tmpdir):  # cf. https://github.com/Lucas-C/pre-comm
 colored-traceback==0.3.0 \
     --hash=sha256:6da7ce2b1da869f6bb54c927b415b95727c4bb6d9a84c4615ea77d9872911b05 \
     --hash=sha256:f76c21a4b4c72e9e09763d4d1b234afc469c88693152a763ad6786467ef9e79f
-configobj==5.0.6
 future==0.18.3
 six==1.13.0 \
     --hash=sha256:1f1b7d42e254082a9db6279deae68afb421ceba6158efa6131de7b3003ee93fd \
@@ -90,7 +89,9 @@ def test_pyproject_toml_without_deps(tmpdir):
 name = 'Thing'
 version = '1.2.3'
 description = 'Dummy'
-authors = ['Lucas Cimon']""")
+authors = ['Lucas Cimon']
+[tool.poetry.dev-dependencies]
+""")
     assert safety([str(pyproject_file)]) == 0
 
 def test_pyproject_toml_with_ko_deps(tmpdir):
@@ -103,7 +104,10 @@ authors = ['Lucas Cimon']
 
 [tool.poetry.dependencies]
 python = "^3.7"
-jsonpickle = '1.4.1'""")
+jsonpickle = '1.4.1'
+
+[tool.poetry.dev-dependencies]
+""")
     assert safety([str(pyproject_file)]) == EXIT_CODE_VULNERABILITIES_FOUND
 
 def test_pyproject_toml_with_ko_dev_deps(tmpdir):
