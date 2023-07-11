@@ -90,7 +90,6 @@ name = 'Thing'
 version = '1.2.3'
 description = 'Dummy'
 authors = ['Lucas Cimon']
-[tool.poetry.dev-dependencies]
 """)
     assert safety([str(pyproject_file)]) == 0
 
@@ -105,8 +104,6 @@ authors = ['Lucas Cimon']
 [tool.poetry.dependencies]
 python = "^3.7"
 jsonpickle = '1.4.1'
-
-[tool.poetry.dev-dependencies]
 """)
     assert safety([str(pyproject_file)]) == EXIT_CODE_VULNERABILITIES_FOUND
 
@@ -121,6 +118,34 @@ authors = ['Lucas Cimon']
 [tool.poetry.dependencies]
 python = "^3.7"
 
+# Poetry pre-1.2.x style
 [tool.poetry.dev-dependencies]
 jsonpickle = '1.4.1'""")
-    assert safety([str(pyproject_file)]) == EXIT_CODE_VULNERABILITIES_FOUND
+    assert safety([str(pyproject_file), "--groups=dev"]) == EXIT_CODE_VULNERABILITIES_FOUND
+
+@pytest.mark.parametrize(
+    "group_arg,status",
+    [
+        ("--groups=dev", 0),
+        ("--groups=dev,test", EXIT_CODE_VULNERABILITIES_FOUND),
+        ("--groups=test", EXIT_CODE_VULNERABILITIES_FOUND),
+    ]
+)
+def test_pyproject_toml_with_groups(tmpdir, group_arg, status):
+    pyproject_file = tmpdir.join('pyproject.toml')
+    pyproject_file.write("""[tool.poetry]
+    name = 'Thing'
+    version = '1.2.3'
+    description = 'Dummy'
+    authors = ['Lucas Cimon']
+
+    [tool.poetry.dependencies]
+    python = "^3.7"
+
+    # Poetry 1.2.0 style
+    [tool.poetry.group.dev.dependencies]
+    colored = "1.4.2"
+
+    [tool.poetry.group.test.dependencies]
+    insecure-package = '0.1.0'""")
+    assert safety([str(pyproject_file), group_arg]) == status
