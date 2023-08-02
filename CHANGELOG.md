@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/),
 and [PEP 440](https://www.python.org/dev/peps/pep-0440/).
 
 
+## [1.3.2] - 2023-08-02
+### Added
+- new optional `--groups` argument allowing selection of additional dependency groups - thanks to @kurthaegeman - _cf._ [PR #45](https://github.com/Lucas-C/pre-commit-hooks-safety/pull/45)
+
 ## [1.3.1] - 2023-01-04
 ### Fixed
 - compatibility with latest safety version (2.3.5)
