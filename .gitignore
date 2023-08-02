@@ -1,4 +1,7 @@
 *.pyc
 /pre_commit_hooks_safety.egg-info
 /.cache/
-/.coverage
+**/.coverage
+/venv/
+/.idea/
+build/

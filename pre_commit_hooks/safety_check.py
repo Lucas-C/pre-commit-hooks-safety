@@ -14,6 +14,11 @@ from safety.cli import cli
 
 def build_parser():
     parser = argparse.ArgumentParser()
+
+    class AppendStringAction(argparse.Action):  # pylint: disable=too-few-public-methods
+        def __call__(self, _, namespace, values, option_string=None):
+            setattr(namespace, self.dest, values.split(','))
+
     parser.add_argument(
         "--full-report",
         dest="report_arg",
@@ -28,6 +33,7 @@ def build_parser():
         const="--short-report",
     )
     parser.add_argument("--ignore", "-i", action="append")
+    parser.add_argument("--groups", "-g", default=[], action=AppendStringAction)
     parser.add_argument("files", nargs="+")
     return parser
 
@@ -43,7 +49,7 @@ def main(argv=None):  # pylint: disable=inconsistent-return-statements
         with pyproject_toml_filepath.open() as pyproject_file:
             lines = [line.strip() for line in pyproject_file.readlines()]
         if any(line.startswith("[tool.poetry]") for line in lines):
-            with convert_poetry_to_requirements(pyproject_toml_filepath) as tmp_requirements:
+            with convert_poetry_to_requirements(pyproject_toml_filepath, groups=parsed_args.groups) as tmp_requirements:
                 return call_safety_check([tmp_requirements.name], parsed_args.ignore, parsed_args.report_arg, args_rest)
         parser.error("Unsupported build tool: this pre-commit hook currently only handles pyproject.toml with Poetry"
                      " ([tool.poetry] must be present in pyproject.toml)")
@@ -70,7 +76,7 @@ def call_safety_check(requirements_file_paths, ignore_args, report_arg, args_res
 
 
 @contextmanager
-def convert_poetry_to_requirements(pyproject_toml_filepath):  # Sad function name :(
+def convert_poetry_to_requirements(pyproject_toml_filepath, groups):  # Sad function name :(
     poetry_cmd_path = which("poetry")
     if not poetry_cmd_path:  # Using install-poetry.py installation $PATH:
         poetry_cmd_path = os.path.join(os.environ.get("HOME", ""), ".local", "bin", "poetry")
@@ -82,7 +88,11 @@ def convert_poetry_to_requirements(pyproject_toml_filepath):  # Sad function nam
         with ntf:
             # Placing ourselves in the pyproject.toml parent directory:
             with chdir(pyproject_toml_filepath.parent):
-                check_call([poetry_cmd_path, "export", "--with", "dev", "--format", "requirements.txt", "--output", ntf.name])
+                cmd = [poetry_cmd_path, "export", "--format", "requirements.txt", "--output", ntf.name]
+                # Add groups to include in the export command
+                for group in groups:
+                    cmd.extend(["--with", group])
+                check_call(cmd)
             yield ntf
     finally:  # Manually deleting temporary file:
         os.remove(ntf.name)
