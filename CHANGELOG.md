@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/),
 and [PEP 440](https://www.python.org/dev/peps/pep-0440/).
 
 
+## [1.3.3] - 2024-01-26
+### Fixed
+- `Error: No such option: --disable-telemetry Did you mean --disable-optional-telemetry?` - [issue #48](https://github.com/Lucas-C/pre-commit-hooks-safety/issues/48)
+
 ## [1.3.2] - 2023-08-02
 ### Added
 - new optional `--groups` argument allowing selection of additional dependency groups - thanks to @kurthaegeman - _cf._ [PR #45](https://github.com/Lucas-C/pre-commit-hooks-safety/pull/45)

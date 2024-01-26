@@ -11,7 +11,7 @@ Note that **telemetry data will be sent with every Safety call**. These data are
 ## Usage
 ```yaml
 -   repo: https://github.com/Lucas-C/pre-commit-hooks-safety
-    rev: v1.3.2
+    rev: v1.3.3
     hooks:
     -   id: python-safety-dependencies-check
 ```
