@@ -24,7 +24,7 @@ def test_short_report(tmpdir):
 def test_disable_telemetry(tmpdir):
     requirements_file = tmpdir.join('requirements.txt')
     requirements_file.write('urllib3==1.24.1')
-    assert safety(["--disable-telemetry", str(requirements_file)]) == EXIT_CODE_VULNERABILITIES_FOUND
+    assert safety(["--disable-optional-telemetry", str(requirements_file)]) == EXIT_CODE_VULNERABILITIES_FOUND
 
 @pytest.mark.parametrize("report", [["--full-report"], []])
 def test_full_report(tmpdir, report, capfd):
