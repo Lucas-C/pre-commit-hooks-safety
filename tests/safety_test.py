@@ -36,8 +36,8 @@ def test_full_report(tmpdir, report, capfd):
 @pytest.mark.parametrize(
     "args",
     [
-        ["--ignore=37055,37071,38834,43975"],
-        ['--ignore=37055', '--ignore=37071', '--ignore=38834', '--ignore=43975'],
+        ["--ignore=37055,37071,38834,43975,61601,61893"],
+        ['--ignore=37055', '--ignore=37071', '--ignore=38834', '--ignore=43975', '--ignore=61601', '--ignore=61893'],
     ]
 )
 def test_ignore_ok(tmpdir, args):
@@ -48,7 +48,7 @@ def test_ignore_ok(tmpdir, args):
 @pytest.mark.parametrize(
     "ignore_arg,status",
     [
-        ("--ignore=37055,37071,38834,43975", 0),
+        ("--ignore=37055,37071,38834,43975,61601,61893", 0),
         ("--ignore=37055,37071,38834", EXIT_CODE_VULNERABILITIES_FOUND),
         ("--ignore=37055", EXIT_CODE_VULNERABILITIES_FOUND),
         ("--ignore=37071", EXIT_CODE_VULNERABILITIES_FOUND),
@@ -103,7 +103,7 @@ authors = ['Lucas Cimon']
 
 [tool.poetry.dependencies]
 python = "^3.7"
-jsonpickle = '1.4.1'
+jubatus = '1.0.2'
 """)
     assert safety([str(pyproject_file)]) == EXIT_CODE_VULNERABILITIES_FOUND
 
@@ -120,7 +120,8 @@ python = "^3.7"
 
 # Poetry pre-1.2.x style
 [tool.poetry.dev-dependencies]
-jsonpickle = '1.4.1'""")
+jubatus = '1.0.2'
+""")
     assert safety([str(pyproject_file), "--groups=dev"]) == EXIT_CODE_VULNERABILITIES_FOUND
 
 @pytest.mark.parametrize(
