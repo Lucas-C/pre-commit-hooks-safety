@@ -14,7 +14,7 @@ jobs:
     strategy:
       max-parallel: 5
       matrix:
-        python-version: ['3.8', '3.9', '3.10', '3.11']
+        python-version: ['3.8', '3.9', '3.10', '3.11', '3.12', '3.13']
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v4
@@ -26,7 +26,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install --upgrade . -r dev-requirements.txt
-      - name: Execute all pre-commit hooks on all files ☑
+      - name: Execute all pre-commit hooks on all files 🔎
         run: pre-commit run --all-files
       - name: Running tests ☑
         run: pytest

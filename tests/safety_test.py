@@ -38,20 +38,20 @@ def test_full_report(tmpdir, report, capfd):
 @pytest.mark.parametrize(
     "args",
     [
-        ["--ignore=37055,37071,38834,43975,61601,61893"],
-        ['--ignore=37055', '--ignore=37071', '--ignore=38834', '--ignore=43975', '--ignore=61601', '--ignore=61893'],
+        ["--ignore=37055,37071,38834,43975,61601,61893,71562,71608"],
+        ['--ignore=37055', '--ignore=37071', '--ignore=38834', '--ignore=43975', '--ignore=61601', '--ignore=61893', '--ignore=71562', '--ignore=71608'],
     ]
 )
-def test_ignore_ok(tmpdir, args):
+def test_ignore_ok(capfd, tmpdir, args):
     requirements_file = tmpdir.join('requirements.txt')
     requirements_file.write('urllib3==1.24.1')
-    assert safety([str(requirements_file)] + args) == 0
+    assert safety([str(requirements_file)] + args) == 0, capfd.readouterr()
 
 @pytest.mark.parametrize(
     "ignore_arg,status",
     [
-        ("--ignore=37055,37071,38834,43975,61601,61893", 0),
-        ("--ignore=37055,37071,38834", EXIT_CODE_VULNERABILITIES_FOUND),
+        ("--ignore=37055,37071,38834,43975,61601,61893,71562,71608", 0),
+        ("--ignore=37055,37071,38834,43975,61601,61893,71562", EXIT_CODE_VULNERABILITIES_FOUND),
         ("--ignore=37055", EXIT_CODE_VULNERABILITIES_FOUND),
         ("--ignore=37071", EXIT_CODE_VULNERABILITIES_FOUND),
         ("--ignore=38834", EXIT_CODE_VULNERABILITIES_FOUND),
