@@ -1,13 +1,13 @@
 repos:
 -   repo: https://github.com/Lucas-C/pre-commit-hooks
-    rev: v1.5.4
+    rev: v1.5.5
     hooks:
     -   id: remove-crlf
     -   id: remove-tabs
     -   id: chmod
         args: ['644']
 -   repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
+    rev: v5.0.0
     hooks:
     -   id: trailing-whitespace
     -   id: check-yaml
@@ -25,10 +25,3 @@ repos:
         entry: pylint
         files: \.py$
         exclude: ^tests/resources/.*(init_with_license|todo)
-    -   id: pytest
-        name: pytest
-        language: python
-        entry: pytest -sv
-        require_serial: true
-        pass_filenames: false
-        files: \.py$
