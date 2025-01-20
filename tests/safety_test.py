@@ -31,7 +31,9 @@ def test_full_report(tmpdir, report, capfd):
     requirements_file = tmpdir.join('requirements.txt')
     requirements_file.write('urllib3==1.24.1')
     assert safety(report + [str(requirements_file)]) == EXIT_CODE_VULNERABILITIES_FOUND
-    assert "urllib3 library" in capfd.readouterr().out
+    output = capfd.readouterr().out
+    assert "urllib3" in output
+    assert "1.24.1" in output
 
 @pytest.mark.parametrize(
     "args",
