@@ -104,7 +104,7 @@ description = 'Dummy'
 authors = ['Lucas Cimon']
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.9"
 jubatus = '1.0.2'
 """)
     assert safety([str(pyproject_file)]) == EXIT_CODE_VULNERABILITIES_FOUND
@@ -118,7 +118,7 @@ description = 'Dummy'
 authors = ['Lucas Cimon']
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.9"
 
 # Poetry pre-1.2.x style
 [tool.poetry.dev-dependencies]
@@ -143,7 +143,7 @@ def test_pyproject_toml_with_groups(tmpdir, group_arg, status):
     authors = ['Lucas Cimon']
 
     [tool.poetry.dependencies]
-    python = "^3.8"
+    python = "^3.9"
 
     # Poetry 1.2.0 style
     [tool.poetry.group.dev.dependencies]
