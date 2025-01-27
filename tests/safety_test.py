@@ -120,7 +120,7 @@ description = 'Dummy'
 authors = ['Lucas Cimon']
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.9"
 jubatus = '1.0.2'
 """)
     assert safety([str(pyproject_file)]) == EXIT_CODE_VULNERABILITIES_FOUND
@@ -134,7 +134,7 @@ version = "1.2.3"
 description = "Dummy"
 authors = [ {name = "Lucas Cimon"} ]
 
-requires-python = ">=3.8"
+requires-python = ">=3.9"
 
 dependencies = ["jubatus==1.0.2"]
 
@@ -153,7 +153,7 @@ version = "1.2.3"
 description = "Dummy"
 authors = [ {name = "Lucas Cimon"} ]
 
-requires-python = ">=3.8"
+requires-python = ">=3.9"
 dynamic = ["dependencies"]
 
 [tool.poetry.dependencies]
@@ -176,7 +176,7 @@ description = 'Dummy'
 authors = ['Lucas Cimon']
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.9"
 
 # Poetry pre-1.2.x style
 [tool.poetry.dev-dependencies]
@@ -193,7 +193,7 @@ version = "1.2.3"
 description = "Dummy"
 authors = [ {name = "Lucas Cimon"} ]
 
-requires-python = ">=3.8"
+requires-python = ">=3.9"
 
 [tool.poetry.group.dev.dependencies]
 jubatus = "1.0.2"
@@ -223,7 +223,7 @@ description = 'Dummy'
 authors = ['Lucas Cimon']
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.9"
 
 # Poetry 1.2.0 style
 [tool.poetry.group.dev.dependencies]
@@ -251,7 +251,7 @@ version = "1.2.3"
 description = "Dummy"
 authors = [ {name = "Lucas Cimon"} ]
 
-requires-python = ">=3.8"
+requires-python = ">=3.9"
 
 [tool.poetry.group.dev.dependencies]
 colored = "1.4.2"
