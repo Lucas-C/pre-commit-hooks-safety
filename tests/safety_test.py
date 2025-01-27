@@ -95,6 +95,22 @@ authors = ['Lucas Cimon']
 """)
     assert safety([str(pyproject_file)]) == 0
 
+
+def test_pyproject_toml_pep_621_format(tmpdir):
+    pyproject_file = tmpdir.join('pyproject.toml')
+    pyproject_file.write("""[project]
+name = "Thing"
+version = "1.2.3"
+description = "Dummy"
+authors = [ {name = "Lucas Cimon"} ]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+""")
+    assert safety([str(pyproject_file)]) == 0
+
+
 def test_pyproject_toml_with_ko_deps(tmpdir):
     pyproject_file = tmpdir.join('pyproject.toml')
     pyproject_file.write("""[tool.poetry]
@@ -108,6 +124,48 @@ python = "^3.8"
 jubatus = '1.0.2'
 """)
     assert safety([str(pyproject_file)]) == EXIT_CODE_VULNERABILITIES_FOUND
+
+
+def test_pyproject_toml_pep_621_format_with_ko_deps(tmpdir):
+    pyproject_file = tmpdir.join('pyproject.toml')
+    pyproject_file.write("""[project]
+name = "Thing"
+version = "1.2.3"
+description = "Dummy"
+authors = [ {name = "Lucas Cimon"} ]
+
+requires-python = ">=3.8"
+
+dependencies = ["jubatus==1.0.2"]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+""")
+    assert safety([str(pyproject_file)]) == EXIT_CODE_VULNERABILITIES_FOUND
+
+
+def test_pyproject_toml_pep_621_dynamic_format_with_ko_deps(tmpdir):
+    pyproject_file = tmpdir.join('pyproject.toml')
+    pyproject_file.write("""[project]
+name = "Thing"
+version = "1.2.3"
+description = "Dummy"
+authors = [ {name = "Lucas Cimon"} ]
+
+requires-python = ">=3.8"
+dynamic = ["dependencies"]
+
+[tool.poetry.dependencies]
+jubatus = "1.0.2"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+""")
+    assert safety([str(pyproject_file)]) == EXIT_CODE_VULNERABILITIES_FOUND
+
+
 
 def test_pyproject_toml_with_ko_dev_deps(tmpdir):
     pyproject_file = tmpdir.join('pyproject.toml')
@@ -126,6 +184,28 @@ jubatus = '1.0.2'
 """)
     assert safety([str(pyproject_file), "--groups=dev"]) == EXIT_CODE_VULNERABILITIES_FOUND
 
+
+def test_pyproject_toml_pep_621_with_ko_dev_deps(tmpdir):
+    pyproject_file = tmpdir.join('pyproject.toml')
+    pyproject_file.write("""[project]
+name = "Thing"
+version = "1.2.3"
+description = "Dummy"
+authors = [ {name = "Lucas Cimon"} ]
+
+requires-python = ">=3.8"
+
+[tool.poetry.group.dev.dependencies]
+jubatus = "1.0.2"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+""")
+    assert safety([str(pyproject_file), "--groups=dev"]) == EXIT_CODE_VULNERABILITIES_FOUND
+
+
+
 @pytest.mark.parametrize(
     "group_arg,status",
     [
@@ -137,18 +217,46 @@ jubatus = '1.0.2'
 def test_pyproject_toml_with_groups(tmpdir, group_arg, status):
     pyproject_file = tmpdir.join('pyproject.toml')
     pyproject_file.write("""[tool.poetry]
-    name = 'Thing'
-    version = '1.2.3'
-    description = 'Dummy'
-    authors = ['Lucas Cimon']
+name = 'Thing'
+version = '1.2.3'
+description = 'Dummy'
+authors = ['Lucas Cimon']
 
-    [tool.poetry.dependencies]
-    python = "^3.8"
+[tool.poetry.dependencies]
+python = "^3.8"
 
-    # Poetry 1.2.0 style
-    [tool.poetry.group.dev.dependencies]
-    colored = "1.4.2"
+# Poetry 1.2.0 style
+[tool.poetry.group.dev.dependencies]
+colored = "1.4.2"
 
-    [tool.poetry.group.test.dependencies]
-    insecure-package = '0.1.0'""")
+[tool.poetry.group.test.dependencies]
+insecure-package = '0.1.0'
+""")
+    assert safety([str(pyproject_file), group_arg]) == status
+
+
+@pytest.mark.parametrize(
+    "group_arg,status",
+    [
+        ("--groups=dev", 0),
+        ("--groups=dev,test", EXIT_CODE_VULNERABILITIES_FOUND),
+        ("--groups=test", EXIT_CODE_VULNERABILITIES_FOUND),
+    ]
+)
+def test_pyproject_toml_pep_621_format_with_groups(tmpdir, group_arg, status):
+    pyproject_file = tmpdir.join('pyproject.toml')
+    pyproject_file.write("""[project]
+name = "Thing"
+version = "1.2.3"
+description = "Dummy"
+authors = [ {name = "Lucas Cimon"} ]
+
+requires-python = ">=3.8"
+
+[tool.poetry.group.dev.dependencies]
+colored = "1.4.2"
+
+[tool.poetry.group.test.dependencies]
+insecure-package = "0.1.0"
+""")
     assert safety([str(pyproject_file), group_arg]) == status
