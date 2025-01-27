@@ -258,5 +258,9 @@ colored = "1.4.2"
 
 [tool.poetry.group.test.dependencies]
 insecure-package = "0.1.0"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
 """)
     assert safety([str(pyproject_file), group_arg]) == status
