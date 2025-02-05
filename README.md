@@ -22,7 +22,7 @@ There are a few different arguments that this hook will accept.
 The first is the `files` argument. Simply put which file your dependencies are listed in.
 ```yaml
 -   repo: https://github.com/Lucas-C/pre-commit-hooks-safety
-    rev: v1.3.1
+    rev: v1.4.0
     hooks:
     -   id: python-safety-dependencies-check
         files: pyproject.toml
@@ -30,7 +30,7 @@ The first is the `files` argument. Simply put which file your dependencies are l
 The next is the `--ignore` flag. This will ignore a comma separated list of known security issues. For example
 ```yaml
 -   repo: https://github.com/Lucas-C/pre-commit-hooks-safety
-    rev: v1.3.1
+    rev: v1.4.0
     hooks:
     -   id: python-safety-dependencies-check
         args: ["--ignore=39153,39652"]
@@ -38,7 +38,7 @@ The next is the `--ignore` flag. This will ignore a comma separated list of know
 The `--groups` flag will allow you to select additional dependency groups, other than the implicit main group. An example:
 ```yaml
 -   repo: https://github.com/Lucas-C/pre-commit-hooks-safety
-    rev: v1.3.1
+    rev: v1.4.0
     hooks:
     -   id: python-safety-dependencies-check
         args: ["--groups=dev,test"]
@@ -46,7 +46,7 @@ The `--groups` flag will allow you to select additional dependency groups, other
 You can also select between `--full-report` and `--short-report`. By default, safety will use the `--full-report` flag so you can omit it for cleaner code.
 ```yaml
 -   repo: https://github.com/Lucas-C/pre-commit-hooks-safety
-    rev: v1.3.1
+    rev: v1.4.0
     hooks:
     -   id: python-safety-dependencies-check
         files: pyproject.toml
@@ -91,6 +91,6 @@ You'll need to `pip install safety` beforehand:
 
 ### Releasing
 
-1. Bump version in this `README.md` file, `setup.py`, `.pre-commit-config.yaml` & `CHANGELOG.md`
+1. Bump version in `setup.py`, `.pre-commit-config.yaml`, in a new section in `CHANGELOG.md`, and in all occurences of `rev:` in this `README.md` file.
 2. `git commit -nam "Release $version" && git push && git tag $version && git push --tags`
 3. Create a GitHub release
