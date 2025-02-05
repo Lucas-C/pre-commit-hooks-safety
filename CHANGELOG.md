@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/),
 and [PEP 440](https://www.python.org/dev/peps/pep-0440/).
 
 
+## [1.4.0] - 2025-02-05
+### Added
+- support for Poetry 2.0.0 - _cf._ [PR #55](https://github.com/Lucas-C/pre-commit-hooks-safety/pull/55)
+
 ## [1.3.3] - 2024-01-26
 ### Fixed
 - `Error: No such option: --disable-telemetry Did you mean --disable-optional-telemetry?` - [issue #48](https://github.com/Lucas-C/pre-commit-hooks-safety/issues/48)
