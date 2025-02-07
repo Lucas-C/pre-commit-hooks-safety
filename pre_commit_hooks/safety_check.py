@@ -1,5 +1,3 @@
-from __future__ import print_function
-
 import argparse
 import os
 import sys
@@ -41,9 +39,14 @@ def build_parser():
 def main(argv=None):  # pylint: disable=inconsistent-return-statements
     parser = build_parser()
     parsed_args, args_rest = parser.parse_known_args(argv)
-    if all("requirements" in file_path for file_path in parsed_args.files):
-        return call_safety_check(parsed_args.files, parsed_args.ignore, parsed_args.report_arg, args_rest)
+
     files = [Path(f) for f in parsed_args.files]
+    if all(
+        "requirements" in file_path.name and file_path.name.endswith(".txt")
+        for file_path in files
+    ):
+        return call_safety_check(parsed_args.files, parsed_args.ignore, parsed_args.report_arg, args_rest)
+
     if len(files) == 1 and files[0].name == "pyproject.toml":
         pyproject_toml_filepath = files[0]
         with pyproject_toml_filepath.open() as pyproject_file:
