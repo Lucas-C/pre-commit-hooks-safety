@@ -11,7 +11,7 @@ def test_dev_requirements():
 
 def test_non_ok_dependency(tmp_path):
     requirements_file = tmp_path / "requirements.txt"
-    with open(requirements_file, "w") as file:
+    with open(requirements_file, "w", encoding="utf-8") as file:
         file.write("urllib3==1.24.1")
 
     assert safety([str(requirements_file)]) == EXIT_CODE_VULNERABILITIES_FOUND
@@ -19,7 +19,7 @@ def test_non_ok_dependency(tmp_path):
 
 def test_short_report(tmp_path):
     requirements_file = tmp_path / "requirements.txt"
-    with open(requirements_file, "w") as file:
+    with open(requirements_file, "w", encoding="utf-8") as file:
         file.write("urllib3==1.24.1")
 
     assert safety(["--short-report", str(requirements_file)]) == EXIT_CODE_VULNERABILITIES_FOUND
@@ -27,7 +27,7 @@ def test_short_report(tmp_path):
 
 def test_disable_telemetry(tmp_path):
     requirements_file = tmp_path / "requirements.txt"
-    with open(requirements_file, "w") as file:
+    with open(requirements_file, "w", encoding="utf-8") as file:
         file.write("urllib3==1.24.1")
 
     assert safety(["--disable-optional-telemetry", str(requirements_file)]) == EXIT_CODE_VULNERABILITIES_FOUND
@@ -36,7 +36,7 @@ def test_disable_telemetry(tmp_path):
 @pytest.mark.parametrize("report", [["--full-report"], []])
 def test_full_report(tmp_path, report, capfd):
     requirements_file = tmp_path / "requirements.txt"
-    with open(requirements_file, "w") as file:
+    with open(requirements_file, "w", encoding="utf-8") as file:
         file.write("urllib3==1.24.1")
 
     assert safety(report + [str(requirements_file)]) == EXIT_CODE_VULNERABILITIES_FOUND
@@ -55,7 +55,7 @@ def test_full_report(tmp_path, report, capfd):
 )
 def test_ignore_ok(capfd, tmp_path, args):
     requirements_file = tmp_path / "requirements.txt"
-    with open(requirements_file, "w") as file:
+    with open(requirements_file, "w", encoding="utf-8") as file:
         file.write("urllib3==1.24.1")
 
     assert safety([str(requirements_file)] + args) == 0, capfd.readouterr()
@@ -73,7 +73,7 @@ def test_ignore_ok(capfd, tmp_path, args):
 )
 def test_varargs_escape(tmp_path, ignore_arg, status):
     requirements_file = tmp_path / "requirements.txt"
-    with open(requirements_file, "w") as file:
+    with open(requirements_file, "w", encoding="utf-8") as file:
         file.write("urllib3==1.24.1")
 
     assert safety([ignore_arg, "--", str(requirements_file)]) == status
@@ -81,7 +81,7 @@ def test_varargs_escape(tmp_path, ignore_arg, status):
 
 def test_poetry_requirements(tmp_path):  # cf. https://github.com/Lucas-C/pre-commit-hooks-safety/issues/5
     requirements_file = tmp_path / "requirements.txt"
-    with open(requirements_file, "w") as file:
+    with open(requirements_file, "w", encoding="utf-8") as file:
         file.write("""colored==1.4.2
 colored-traceback==0.3.0 \
     --hash=sha256:6da7ce2b1da869f6bb54c927b415b95727c4bb6d9a84c4615ea77d9872911b05 \
@@ -96,7 +96,7 @@ six==1.13.0 \
 
 def test_editable_url_to_tarball_dependency(tmp_path):
     requirements_file = tmp_path / "requirements.txt"
-    with open(requirements_file, "w") as file:
+    with open(requirements_file, "w", encoding="utf-8") as file:
         file.write(
             "-e https://files.pythonhosted.org/packages/6a/11/114c67b0e3c25c19497fde977538339530d8ffa050d6ec9349793f933faa/lockfile-0.10.2.tar.gz"
         )
@@ -107,7 +107,7 @@ def test_editable_url_to_tarball_dependency(tmp_path):
 @pytest.mark.xfail(reason="cf. https://github.com/Lucas-C/pre-commit-hooks-safety/issues/1")
 def test_bare_url_to_tarball_dependency(tmp_path):
     requirements_file = tmp_path / "requirements.txt"
-    with open(requirements_file, "w") as file:
+    with open(requirements_file, "w", encoding="utf-8") as file:
         file.write(
             "https://files.pythonhosted.org/packages/6a/11/114c67b0e3c25c19497fde977538339530d8ffa050d6ec9349793f933faa/lockfile-0.10.2.tar.gz"
         )
@@ -117,7 +117,7 @@ def test_bare_url_to_tarball_dependency(tmp_path):
 
 def test_pyproject_toml_without_deps(tmp_path):
     pyproject_file = tmp_path / "pyproject.toml"
-    with open(pyproject_file, "w") as file:
+    with open(pyproject_file, "w", encoding="utf-8") as file:
         file.write("""[tool.poetry]
 name = "Thing"
 version = "1.2.3"
@@ -129,7 +129,7 @@ authors = ["Lucas Cimon"]
 
 def test_pyproject_toml_pep_621_format(tmp_path):
     pyproject_file = tmp_path / "pyproject.toml"
-    with open(pyproject_file, "w") as file:
+    with open(pyproject_file, "w", encoding="utf-8") as file:
         file.write("""[project]
 name = "Thing"
 version = "1.2.3"
@@ -145,7 +145,7 @@ build-backend = "poetry.core.masonry.api"
 
 def test_pyproject_toml_with_ko_deps(tmp_path):
     pyproject_file = tmp_path / "pyproject.toml"
-    with open(pyproject_file, "w") as file:
+    with open(pyproject_file, "w", encoding="utf-8") as file:
         file.write("""[tool.poetry]
 name = "Thing"
 version = "1.2.3"
@@ -161,7 +161,7 @@ jubatus = "1.0.2"
 
 def test_pyproject_toml_pep_621_format_with_ko_deps(tmp_path):
     pyproject_file = tmp_path / "pyproject.toml"
-    with open(pyproject_file, "w") as file:
+    with open(pyproject_file, "w", encoding="utf-8") as file:
         file.write("""[project]
 name = "Thing"
 version = "1.2.3"
@@ -181,7 +181,7 @@ build-backend = "poetry.core.masonry.api"
 
 def test_pyproject_toml_pep_621_dynamic_format_with_ko_deps(tmp_path):
     pyproject_file = tmp_path / "pyproject.toml"
-    with open(pyproject_file, "w") as file:
+    with open(pyproject_file, "w", encoding="utf-8") as file:
         file.write("""[project]
 name = "Thing"
 version = "1.2.3"
@@ -203,7 +203,7 @@ build-backend = "poetry.core.masonry.api"
 
 def test_pyproject_toml_with_ko_dev_deps(tmp_path):
     pyproject_file = tmp_path / "pyproject.toml"
-    with open(pyproject_file, "w") as file:
+    with open(pyproject_file, "w", encoding="utf-8") as file:
         file.write("""[tool.poetry]
 name = "Thing"
 version = "1.2.3"
@@ -222,7 +222,7 @@ jubatus = "1.0.2"
 
 def test_pyproject_toml_pep_621_with_ko_dev_deps(tmp_path):
     pyproject_file = tmp_path / "pyproject.toml"
-    with open(pyproject_file, "w") as file:
+    with open(pyproject_file, "w", encoding="utf-8") as file:
         file.write("""[project]
 name = "Thing"
 version = "1.2.3"
@@ -251,7 +251,7 @@ build-backend = "poetry.core.masonry.api"
 )
 def test_pyproject_toml_with_groups(tmp_path, group_arg, status):
     pyproject_file = tmp_path / "pyproject.toml"
-    with open(pyproject_file, "w") as file:
+    with open(pyproject_file, "w", encoding="utf-8") as file:
         file.write("""[tool.poetry]
 name = "Thing"
 version = "1.2.3"
@@ -281,7 +281,7 @@ insecure-package = "0.1.0"
 )
 def test_pyproject_toml_pep_621_format_with_groups(tmp_path, group_arg, status):
     pyproject_file = tmp_path / "pyproject.toml"
-    with open(pyproject_file, "w") as file:
+    with open(pyproject_file, "w", encoding="utf-8") as file:
         file.write("""[project]
 name = "Thing"
 version = "1.2.3"
@@ -306,11 +306,11 @@ build-backend = "poetry.core.masonry.api"
 def test_allow_dir_with_requirements_in_name(tmp_path):
     dir_path = tmp_path / "src_requirements_dir"
     dir_path.mkdir(exist_ok=True)
-    with open(dir_path / "dummy_file.py", "w") as file:
-        file.write("# this is a commnent")
+    with open(dir_path / "dummy_file.py", "w", encoding="utf-8") as file:
+        file.write("# this is a comment")
 
     pyproject_file = tmp_path / "pyproject.toml"
-    with open(pyproject_file, "w") as file:
+    with open(pyproject_file, "w", encoding="utf-8") as file:
         file.write("""[tool.poetry]
 name = "Thing"
 version = "1.2.3"
@@ -323,11 +323,11 @@ authors = ["Lucas Cimon"]
 def test_allow_file_with_requirements_in_name(tmp_path):
     dir_path = tmp_path / "src"
     dir_path.mkdir(exist_ok=True)
-    with open(dir_path / "create_requirements.py", "w") as file:
-        file.write("# this is a commnent")
+    with open(dir_path / "create_requirements.py", "w", encoding="utf-8") as file:
+        file.write("# this is a comment")
 
     pyproject_file = tmp_path / "pyproject.toml"
-    with open(pyproject_file, "w") as file:
+    with open(pyproject_file, "w", encoding="utf-8") as file:
         file.write("""[tool.poetry]
 name = "Thing"
 version = "1.2.3"
