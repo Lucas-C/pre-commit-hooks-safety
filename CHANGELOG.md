@@ -7,6 +7,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/),
 and [PEP 440](https://www.python.org/dev/peps/pep-0440/).
 
+## [1.4.1] - 2025-02-05
+### Added
+- Add more robust requirements path check - _cf._ [PR #55](https://github.com/Lucas-C/pre-commit-hooks-safety/pull/59)
 
 ## [1.4.0] - 2025-02-05
 ### Added
