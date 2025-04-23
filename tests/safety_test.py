@@ -30,7 +30,7 @@ def test_disable_telemetry(tmp_path):
     with open(requirements_file, "w", encoding="utf-8") as file:
         file.write("urllib3==1.24.1")
 
-    assert safety(["--disable-optional-telemetry", str(requirements_file)]) == EXIT_CODE_VULNERABILITIES_FOUND
+    assert safety(["--disable-optional-telemetry-data", str(requirements_file)]) == EXIT_CODE_VULNERABILITIES_FOUND
 
 
 @pytest.mark.parametrize("report", [["--full-report"], []])

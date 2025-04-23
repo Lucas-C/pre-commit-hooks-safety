@@ -9,6 +9,9 @@ setup(
     author='Lucas Cimon',
     author_email='lucas.cimon@gmail.com',
     classifiers=[
+        'Development Status :: 5 - Production/Stable',
+        'Intended Audience :: Developers',
+        'Topic :: Software Development :: Version Control :: Git',
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.9',

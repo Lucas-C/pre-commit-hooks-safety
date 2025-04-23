@@ -6,7 +6,7 @@ It checks all files containing `requirements` in their name in the repo.
 
 Releases details: [CHANGELOG.md](CHANGELOG.md)
 
-Note that **telemetry data will be sent with every Safety call**. These data are anonymous and not sensitive. This includes the Python version, the Safety command used (check/license/review), and the Safety options used (without their values). Users can disable this functionality by adding the `--disable-optional-telemetry` flag.
+Note that **telemetry data will be sent with every Safety call**. These data are anonymous and not sensitive. This includes the Python version, the Safety command used (check/license/review), and the Safety options used (without their values). Users can disable this functionality by adding the `--disable-optional-telemetry-data` flag.
 
 ## Usage
 ```yaml
