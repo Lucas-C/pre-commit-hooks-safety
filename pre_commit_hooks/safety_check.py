@@ -71,12 +71,13 @@ def main(argv=None):  # pylint: disable=inconsistent-return-statements
 
 def call_safety_check(requirements_file_paths, ignore_args, report_arg, args_rest):
     safety_args = []
-    if "--disable-optional-telemetry" in args_rest:
-        safety_args.append("--disable-optional-telemetry")
-        args_rest = [arg for arg in args_rest if arg != "--disable-optional-telemetry"]
     if "--disable-optional-telemetry-data" in args_rest:
         safety_args.append("--disable-optional-telemetry-data")
         args_rest = [arg for arg in args_rest if arg != "--disable-optional-telemetry-data"]
+    # --disable-optional-telemetry-data was renamed into --disable-optional-telemetry in safety==3.0.0
+    if "--disable-optional-telemetry" in args_rest:
+        safety_args.append("--disable-optional-telemetry")
+        args_rest = [arg for arg in args_rest if arg != "--disable-optional-telemetry"]
     safety_args.append("check")
     for file_path in requirements_file_paths:
         safety_args += ["--file", file_path]
