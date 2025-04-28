@@ -141,7 +141,7 @@ def test_requirements_txt_directory(tmp_path):
     requirements_path = tmp_path / "requirements"
     requirements_path.mkdir(exist_ok=True)
     requirements_file = requirements_path / "app.txt"
-    with open(requirements_file, "w", encoding="utf-8") as file:    
+    with open(requirements_file, "w", encoding="utf-8") as file:
         file.write("urllib3==1.24.1")
 
     assert safety([str(requirements_file)]) == EXIT_CODE_VULNERABILITIES_FOUND
