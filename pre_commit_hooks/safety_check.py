@@ -42,7 +42,7 @@ def main(argv=None):  # pylint: disable=inconsistent-return-statements
 
     files = [Path(f) for f in parsed_args.files]
     if all(
-        "requirements" in file_path.name and file_path.name.endswith(".txt")
+        "requirements" in str(file_path) and file_path.name.endswith(".txt")
         for file_path in files
     ):
         return call_safety_check(
