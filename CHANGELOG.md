@@ -7,6 +7,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/),
 and [PEP 440](https://www.python.org/dev/peps/pep-0440/).
 
+## [1.4.3] - Not released yet
+### Fixed
+- an issue where the `pre-commit` hook fails when `requirements.txt` files are in a directory named `requirements/` but do not contain "requirements" in their name. - [PR #63](https://github.com/Lucas-C/pre-commit-hooks-safety/pull/63)
+
 ## [1.4.2] - 2025-04-23
 ### Fixed
 - Allowed `--disable-optional-telemetry-data` to be specified instead of `--disable-optional-telemetry`
