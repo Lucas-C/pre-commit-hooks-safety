@@ -137,6 +137,16 @@ def test_bare_url_to_tarball_dependency(tmp_path):
     assert safety([str(requirements_file)]) == 0
 
 
+def test_requirements_txt_directory(tmp_path):
+    requirements_path = tmp_path / "requirements"
+    requirements_path.mkdir(exist_ok=True)
+    requirements_file = requirements_path / "app.txt"
+    with open(requirements_file, "w", encoding="utf-8") as file:    
+        file.write("urllib3==1.24.1")
+
+    assert safety([str(requirements_file)]) == EXIT_CODE_VULNERABILITIES_FOUND
+
+
 def test_pyproject_toml_without_deps(tmp_path):
     pyproject_file = tmp_path / "pyproject.toml"
     with open(pyproject_file, "w", encoding="utf-8") as file:
